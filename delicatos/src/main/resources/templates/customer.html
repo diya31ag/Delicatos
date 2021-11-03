@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="form-div">
+
+    <form class="form-signin" th:action="@{/customer}" method="POST" th:object="${customer}">
+        <input class="form-control" type="text" placeholder="First Name" name="firstName"  th:field="*{firstName}" required>
+        <input class="form-control" type="text" name="LastName" placeholder="Last Name" th:field="*{lastName}" required>
+        <input class="form-control" type="text" name="mobileNo" placeholder="Mobile Number" th:field="*{mobileNo}" required>
+        <input class="form-control" type="text" name="address" placeholder="Address" th:field="*{address}" required>
+        <input class="form-control" type="text" name="city" placeholder="City" th:field="*{city}" required>
+        <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Register</button>
+        <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
+    </form>
+</div>
+</body>
+</html>

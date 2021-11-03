@@ -36,13 +36,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeRequests().antMatchers("/","/login","/logout").permitAll();
-        http.authorizeRequests().antMatchers("/self","/self/**").access("hasAuthority('customer')");
-        http.authorizeRequests().antMatchers("/admin","/admin/**").access("hasAuthority('restaurant')");
-        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
-        http.authorizeRequests().and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/welcome",true).failureUrl("/login?error=true").usernameParameter("email")
-                .passwordParameter("password").and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
+//        http.csrf().disable();
+//        http.authorizeRequests().antMatchers("/","/login","/logout").permitAll();
+//        http.authorizeRequests().antMatchers("/customer","/customer/**").permitAll();
+//        http.authorizeRequests().antMatchers("/restaurant","/restaurant/**").access("hasAuthority('restaurant')");
+//        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+//        http.authorizeRequests().and().formLogin().loginPage("/login")
+//                .defaultSuccessUrl("/welcome",true).failureUrl("/login?error=true").usernameParameter("email")
+//                .passwordParameter("password").and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
+        http.authorizeRequests()
+                .antMatchers("/users").authenticated()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .usernameParameter("email")
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and()
+                .logout().logoutSuccessUrl("/").permitAll();
     }
 }

@@ -8,8 +8,10 @@
 <div class="form-div">
 
     <form class="form-signin" th:action="@{/register}" method="POST" th:object="${user}">
-        <input class="form-control" type="text" placeholder="Email Address" name="email"  th:field="*{email}" required>
+        <input class="form-control" type="email" placeholder="Email Address" name="email"  th:field="*{email}" required>
         <input class="form-control" type="password" name="password" placeholder="Password" th:field="*{password}" required>
+        <label for="re_password">Re Enter Password</label>
+        <input name="re_password" type="password" class="form-control" id="re_password" placeholder="Password" required>
         <p>please select your category</p>
         <input type="radio" th:field="*{role}" th:value="customer" id="customer">
         <label for="customer">Customer</label><br>

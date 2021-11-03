@@ -26,8 +26,9 @@ public class UserRepositoryImplementation implements UserRepository{
     };
     @Override
     public User findByEmail(String email) {
-        String sqlQuery = "select * from user where email=" + email;
-        User user = jdbcTemplate.queryForObject(sqlQuery,userRowMapper);
+//        System.out.println("select * from user where email = ?");
+        String sqlQuery = "select * from user where email = ?";
+        User user = jdbcTemplate.queryForObject(sqlQuery,new Object[]{email},userRowMapper);
         return user;
     }
     @Override
