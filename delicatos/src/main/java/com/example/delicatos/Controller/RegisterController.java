@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.delicatos.Exception.UserAlreadyExistException;
 @Controller
 public class RegisterController {
     private DefaultUserService userService;
@@ -29,21 +30,31 @@ public class RegisterController {
     // path variable to access parts of url
     @PostMapping("/register")//Request parameter for accessing the post request
     public String register(@ModelAttribute("user") User user, BindingResult result, WebRequest request, Model model, RedirectAttributes attributes, @RequestParam String re_password){
+        if(result.hasErrors()){
+            model.addAttribute("registrationForm", user);
+            System.out.println("error1");
+            return "register";
+        }
+        //TODO: Add restrictions to password
         if (user.getPassword().equals(re_password)) {
             try {
-                userService.save(user);
-                model.addAttribute("response", "Registration Successful");
-
-//        System.out.println(user.getRole());
-                return "register_success";
-
-            } catch (Exception e) {
-                model.addAttribute("response", "Username already exist");
+                System.out.println("errorgreat");
+                userService.register(user);
+                System.out.println("errorgreat1");
+                if(user.getRole().equals("customer")) return "redirect:/customerProfileEdit";
+                else return "redirect:/restaurantProfileEdit";
+            }catch (UserAlreadyExistException e){
+                result.rejectValue("email", "user.email","An account already exists for this email.");
+                model.addAttribute("registrationForm", user);
+                System.out.println("error2");
+                return "register";
             }
 
         } else {
+            result.rejectValue("password","user.password","Re enter Password Correctly");
             model.addAttribute("response", "Re enter Password Correctly");
         }
+        System.out.println("error3");
         return "register";
     }
 }

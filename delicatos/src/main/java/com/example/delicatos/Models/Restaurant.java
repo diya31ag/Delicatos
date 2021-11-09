@@ -4,11 +4,12 @@ public class Restaurant {
     private int id;
     private String email;
     private String name;
-    private Address address;
+    private String address;
     private String contact;
     private String city;
-
-    public Restaurant(int id, String email, String name, Address address, String contact, String city) {
+    public Restaurant(){
+    }
+    public Restaurant(int id, String email, String name, String address, String contact, String city) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -33,11 +34,11 @@ public class Restaurant {
         this.name = name;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

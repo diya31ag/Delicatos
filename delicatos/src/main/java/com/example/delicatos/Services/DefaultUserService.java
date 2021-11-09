@@ -20,10 +20,13 @@ public class DefaultUserService{
     public void register(User user) throws UserAlreadyExistException {
 
         //Let's check if user already registered with us
+        System.out.println("errorregister");
         if(checkIfUserExist(user.getEmail())){
             throw new UserAlreadyExistException("User already exists for this email");
         }
+        System.out.println("errorregister1");
         save(user);
+        System.out.println("errorregister2");
     }
 
 

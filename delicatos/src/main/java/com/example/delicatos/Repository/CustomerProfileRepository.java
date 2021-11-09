@@ -24,8 +24,8 @@ public class CustomerProfileRepository {
     };
 
     public Customer findByEmail(String email) {
-        String sqlQuery = "select * from user where email=" + email;
-        Customer customer = jdbcTemplate.queryForObject(sqlQuery,customerRowMapper);
+        String sqlQuery = "select * from user where email = ?";
+        Customer customer = jdbcTemplate.queryForObject(sqlQuery,new Object[]{email},customerRowMapper);
         return customer;
     }
 

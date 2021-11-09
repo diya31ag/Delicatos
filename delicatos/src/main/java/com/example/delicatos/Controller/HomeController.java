@@ -14,7 +14,8 @@ public class HomeController {
     @GetMapping("")
     public String home(SecurityContextHolderAwareRequestWrapper request, Authentication authentication){
         Object c="customer";
-        System.out.println(authentication.getAuthorities().toArray()[0].toString().equals("customer"));
+        System.out.println("werg");
+//        System.out.println(authentication.getAuthorities().toArray()[0].toString().equals("customer"));
         if(request.getRemoteUser()==null)
         return "homepage";
 //        System.out.println("");

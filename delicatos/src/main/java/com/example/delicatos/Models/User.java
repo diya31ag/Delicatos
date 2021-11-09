@@ -1,5 +1,4 @@
 package com.example.delicatos.Models;
-
 public class User {
     private int id;
     private String email;

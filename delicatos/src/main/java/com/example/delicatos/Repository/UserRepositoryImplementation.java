@@ -28,8 +28,12 @@ public class UserRepositoryImplementation implements UserRepository{
     public User findByEmail(String email) {
 //        System.out.println("select * from user where email = ?");
         String sqlQuery = "select * from user where email = ?";
-        User user = jdbcTemplate.queryForObject(sqlQuery,new Object[]{email},userRowMapper);
-        return user;
+//        if(jdbcTemplate.queryForObject(sqlQuery,new Object[]{email},userRowMapper)==null) return null;
+        try {
+            User user = jdbcTemplate.queryForObject(sqlQuery, new Object[]{email}, userRowMapper);
+            return user;
+        }
+        catch(Exception e){return null;}
     }
     @Override
     public void save(User user) {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <style>
+        #form1 {
+            display:none;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome Restaurant</h1>
+<a th:href="@{/logout}"><button>Log Out</button></a>
+<a th:href="@{/restaurant/profile}"><button>Profile</button></a>
+<button id ="formButton">Add Menu Item</button>
+<form class="form-addMenuItem" th:action="@{/restaurant}" method="POST" id="form1" enctype="multipart/form-data" th:object="${menuItem}">
+    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+    </div>
+    <label for="name">Name</label>
+    <input class="form-control" type="text" placeholder="Name" name="name" id="name" th:field="*{itemName}" required><br>
+    <label for="price">Price</label>
+    <input class="form-control" type="text" placeholder="Price" name="price" id="price" th:field="*{price}" required><br>
+    <label for="img">Photo: </label>
+    <input type="file" name="img" id="img" accept="image/png, image/jpeg" /><br>
+    <p>please select the category</p>
+    <tr th:each="category : ${Categories}">
+    <input type="checkbox" th:field="*{categories}" th:value="${category}" th:id="${category}">
+    <label th:for="${category}" th:text="${category}"></label><br>
+    </tr>
+    <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Add</button>
+    <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
+</form>
+<script type="text/javascript">
+    document.querySelector("#formButton").addEventListener("click",function(){
+        $("#form1").toggle();
+    });
+</script>
+</body>
+</html>

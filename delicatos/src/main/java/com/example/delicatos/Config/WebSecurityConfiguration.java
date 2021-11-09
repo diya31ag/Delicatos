@@ -9,6 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
         import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.example.delicatos.Services.UserDetailsServiceImplementation;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.HttpStatusRequestRejectedHandler;
+import org.springframework.security.web.firewall.RequestRejectedHandler;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     UserDetailsServiceImplementation userDetailsService;
@@ -17,7 +25,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public WebSecurityConfiguration(UserDetailsServiceImplementation userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-
+    @Bean
+    public HttpFirewall configureFirewall() {
+        StrictHttpFirewall strictHttpFirewall = new StrictHttpFirewall();
+        strictHttpFirewall
+                .setAllowedHttpMethods(Collections.emptyList());
+        strictHttpFirewall.setAllowBackSlash(true);
+        strictHttpFirewall.setAllowedHttpMethods(Arrays.asList("GET","POST","DELETE", "OPTIONS"));
+        return strictHttpFirewall;
+    }
+    @Bean
+    public RequestRejectedHandler requestRejectedHandler() {
+        return new HttpStatusRequestRejectedHandler();
+    }
     @Bean
     BCryptPasswordEncoder passwordEncoder(){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
