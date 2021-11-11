@@ -33,6 +33,28 @@
     <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Add</button>
     <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
 </form>
+<table>
+    <tr>
+        <th></th>
+        <th>Item Name</th>
+        <th>Price</th>
+        <th>Category</th>
+    </tr>
+    <tr th:if="${menuItemList.isEmpty()}">
+        <td class="text-center" colspan="3">No Records found. Add some...!</td>
+    </tr>
+    <tr th:each="item : ${menuItemList}">
+        <td><img th:src="@{${item.getImageURL()}}" /></td>
+        <td th:text="${item.itemName}"></td>
+        <td th:text="${item.price}"></td>
+        <td>
+            <option th:each="type : ${item.categories}">
+                <p th:text="${type}"> </p>
+            </option>
+        </td>
+        <td><a th:href="@{/deleteItem(itemId = ${item.id})}"><button>Delete</button></a></td>
+    </tr>
+</table>
 <script type="text/javascript">
     document.querySelector("#formButton").addEventListener("click",function(){
         $("#form1").toggle();

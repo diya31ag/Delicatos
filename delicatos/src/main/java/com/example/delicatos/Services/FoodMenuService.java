@@ -14,10 +14,14 @@ public class FoodMenuService {
         this.foodMenuRepository=foodMenuRepository;
     }
     public MenuItem addMenuItem(MenuItem menuItem){
+        System.out.println(menuItem.getImage());
         return foodMenuRepository.addMenuItem(menuItem);
     }
-    public List<MenuItem> getMenuItemByRestaurantId(String restaurantId){
-        return foodMenuRepository.getMenuItemByRestaurantId(restaurantId);
+    public List<MenuItem> getMenuItemByRestaurant(String restaurantId){
+        return foodMenuRepository.getMenuItemByRestaurant(restaurantId);
+    }
+    public void deleteItemByItemId(int id){
+        foodMenuRepository.deleteItemByItemId(id);
     }
 //    public List<MenuItem> getMenuItemByRestaurantIdAndCuisineType(String cuisineType, int restaurantId){
 //        return foodMenuRepository.getMenuItemByRestaurantIdAndCuisineType(cuisineType,restaurantId);

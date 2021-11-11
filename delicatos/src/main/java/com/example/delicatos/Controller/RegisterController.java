@@ -41,6 +41,8 @@ public class RegisterController {
                 System.out.println("errorgreat");
                 userService.register(user);
                 System.out.println("errorgreat1");
+                model.addAttribute("email", user.getEmail());
+                attributes.addFlashAttribute("email", user.getEmail());
                 if(user.getRole().equals("customer")) return "redirect:/customerProfileEdit";
                 else return "redirect:/restaurantProfileEdit";
             }catch (UserAlreadyExistException e){

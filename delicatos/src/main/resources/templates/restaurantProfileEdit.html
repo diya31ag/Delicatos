@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div class="form-div">
-
-    <form class="form-signin" th:action="@{/restaurantProfileEdit}" method="POST" th:object="${restaurant}">
+    <p th:text="${restaurant.email}"></p>
+    <form class="form-signin" th:action="@{/restaurantProfileEdit(email = ${restaurant.email})}" method="POST" th:object="${restaurant}">
         <input class="form-control" type="text" placeholder="Name" name="name"  th:field="*{name}" required>
         <input class="form-control" type="text" name="contact" placeholder="Contact" th:field="*{contact}" required>
         <input class="form-control" type="text" name="address" placeholder="Address" th:field="*{address}" required>

@@ -42,17 +42,23 @@ public class FoodMenuRepository {
         return menuItem1;
     }
 
-    public List<MenuItem> getMenuItemByRestaurantId(String restaurant){
+    public List<MenuItem> getMenuItemByRestaurant(String restaurant){
         String sqlQuery = "select * from menuItem where restaurant = '"+restaurant+"'";
         List<MenuItem> menuItemList = jdbcTemplate.query(sqlQuery, menuItemRowMapper);
         for(int i=0;i<menuItemList.size();i++){
             String sqlQuery1 = "select * from categories where itemId = '" + menuItemList.get(i).getId() + "'";
             List<String> category = jdbcTemplate.query(sqlQuery1,categoryRowMapper);
             menuItemList.get(i).setCategories(category);
+//            System.out.println(menuItemList.get(i).getItemName());
+//            for(int j=0;j<menuItemList.get(i).getCategories().size();j++)
+//                System.out.println(menuItemList.get(i).getCategories().get(j));
         }
         return menuItemList;
     }
-
+    public void deleteItemByItemId(int id){
+        String sqlQuery="delete from menuItem where id = ?";
+        jdbcTemplate.update(sqlQuery,id);
+    }
 //    public List<MenuItem> getMenuItemByRestaurantIdAndCategory(String category, int restaurantId){
 //        String sqlQuery = "select * from menuItem where restaurant = '" + restaurantId + "' and cuisineType = '" + cuisineType + "'";
 //        List<MenuItem> menuItemList = jdbcTemplate.query(sqlQuery, menuItemRowMapper);

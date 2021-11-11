@@ -61,9 +61,14 @@ public class MenuItem {
     }
 
     public String getImage() {
+//        System.out.println(id);
+//        System.out.println("/img/food-item-photos/"+String.valueOf(id)+"/"+photo);
         return photo;
     }
-
+    public String getImageURL(){
+        System.out.println("/img/food-item-photos/"+String.valueOf(id)+"/"+photo);
+        return "/img/food-item-photos/"+String.valueOf(id)+"/"+photo;
+    }
     public void setImage(String photo) {
         this.photo = photo;
     }

@@ -12,7 +12,8 @@ import com.example.delicatos.Models.Restaurant;
 import com.example.delicatos.Models.MenuItem;
 import com.example.delicatos.Services.FoodMenuService;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.List;
+import com.example.delicatos.Services.RestaurantServiceImplementation;
 import java.awt.*;
 import java.io.IOException;
 
@@ -29,26 +30,28 @@ public class RestaurantController {
     @GetMapping("/restaurantProfileEdit")
     public String Restaurant(Model model){
         System.out.println("wetryhgf");
-        model.addAttribute("restaurant", new Restaurant());
+        Restaurant restaurant = new Restaurant();
+        System.out.println(model.asMap().get("email").toString());
+        restaurant.setEmail(model.asMap().get("email").toString());
+        model.addAttribute("restaurant", restaurant);
         return "restaurantProfileEdit";
     }
 
     @PostMapping("/restaurantProfileEdit")
-    public String restaurant(@ModelAttribute("restaurant") Restaurant restaurant, Model model, SecurityContextHolderAwareRequestWrapper request){
-        System.out.println("errorrestaurant0");
-        restaurant.setEmail(request.getRemoteUser());
-        System.out.println("errorrestaurant1");
+    public String restaurant(@ModelAttribute("restaurant") Restaurant restaurant, Model model, SecurityContextHolderAwareRequestWrapper request, @RequestParam String email){
+        System.out.println(email);
+        restaurant.setEmail(email);
         restaurantServiceImplementation.save(restaurant);
-        System.out.println("errorrestaurant2");
         return "redirect:/login";
     }
 
     @GetMapping("/restaurant")
-    public String restaurant(Model model){
-//        String[] cuisines = new String[]{"italian", "indian", "chinese", "japanese", "south indian"};
+    public String restaurant(Model model, SecurityContextHolderAwareRequestWrapper request){
         String[] Categories = new String[]{"dessert", "snacks", "drinks", "starter", "lunch", "dinner", "breakfast", "vegetables", "sweets","italian", "indian", "chinese", "japanese", "south indian"};
         model.addAttribute("Categories", Categories);
         model.addAttribute("menuItem", new MenuItem());
+        List<MenuItem> menuItemList = foodMenuService.getMenuItemByRestaurant(request.getRemoteUser());
+        model.addAttribute("menuItemList", menuItemList);
         return "restaurant";
     }
 
@@ -60,7 +63,7 @@ public class RestaurantController {
         menuItem.setImage(fileName);
         menuItem.setRestaurant(request.getRemoteUser());
         MenuItem savedItem=foodMenuService.addMenuItem(menuItem);
-        String uploadDir = "food-item-photos/" + savedItem.getId();
+        String uploadDir = "src/main/resources/static/img/food-item-photos/" + savedItem.getId();
         try{
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         }
@@ -68,6 +71,18 @@ public class RestaurantController {
             System.out.println(e);
         }
 
-        return "restaurant";
+        return "redirect:/restaurant";
+    }
+
+    @GetMapping("/deleteItem")
+    public String deleteItem(@RequestParam int itemId){
+        foodMenuService.deleteItemByItemId(itemId);
+        return "redirect:/restaurant";
+    }
+    @GetMapping("/restaurant/profile")
+    public String restaurantProfile(Model model,SecurityContextHolderAwareRequestWrapper request){
+        Restaurant restaurant=restaurantServiceImplementation.findByUsername(request.getRemoteUser());
+        model.addAttribute("restaurant",restaurant);
+        return "restaurantProfile";
     }
 }

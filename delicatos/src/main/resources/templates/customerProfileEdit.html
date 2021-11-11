@@ -7,7 +7,7 @@
 <body>
 <div class="form-div">
 
-    <form class="form-signin" th:action="@{/customerProfileEdit}" method="POST" th:object="${customer}">
+    <form class="form-signin" th:action="@{/customerProfileEdit(email = ${customer.email})}" method="POST" th:object="${customer}">
         <input class="form-control" type="text" placeholder="First Name" name="firstName"  th:field="*{firstName}" required>
         <input class="form-control" type="text" name="LastName" placeholder="Last Name" th:field="*{lastName}" required>
         <input class="form-control" type="text" name="mobileNo" placeholder="Mobile Number" th:field="*{mobileNo}" required>

@@ -24,7 +24,8 @@ public class RestaurantProfileRepository {
     };
 
     public Restaurant findByEmail(String email) {
-        String sqlQuery = "select * from user where email = ?";
+        String sqlQuery = "select * from restaurant where email = ?";
+        System.out.println(email);
         Restaurant restaurant = jdbcTemplate.queryForObject(sqlQuery,new Object[]{email}, restaurantRowMapper);
         return restaurant;
     }
