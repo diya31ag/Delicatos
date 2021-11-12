@@ -38,10 +38,19 @@ public class RestaurantController {
     }
 
     @PostMapping("/restaurantProfileEdit")
-    public String restaurant(@ModelAttribute("restaurant") Restaurant restaurant, Model model, SecurityContextHolderAwareRequestWrapper request, @RequestParam String email){
+    public String restaurant(@ModelAttribute("restaurant") Restaurant restaurant, Model model, SecurityContextHolderAwareRequestWrapper request, @RequestParam String email, @RequestParam("img") MultipartFile multipartFile){
         System.out.println(email);
         restaurant.setEmail(email);
-        restaurantServiceImplementation.save(restaurant);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        restaurant.setImage(fileName);
+        Restaurant savedRestaurant=restaurantServiceImplementation.save(restaurant);
+        String uploadDir = "src/main/resources/static/img/restaurant/" + savedRestaurant.getId();
+        try{
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
         return "redirect:/login";
     }
 
@@ -60,6 +69,7 @@ public class RestaurantController {
         System.out.println(request.getRemoteUser());
         System.out.println("sdfg");
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        fileName=fileName.replaceAll("\\s", "");
         menuItem.setImage(fileName);
         menuItem.setRestaurant(request.getRemoteUser());
         MenuItem savedItem=foodMenuService.addMenuItem(menuItem);

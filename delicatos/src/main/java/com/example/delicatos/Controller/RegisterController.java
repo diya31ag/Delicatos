@@ -59,4 +59,8 @@ public class RegisterController {
         System.out.println("error3");
         return "register";
     }
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 }

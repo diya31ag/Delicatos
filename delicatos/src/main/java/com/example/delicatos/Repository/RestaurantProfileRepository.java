@@ -19,7 +19,7 @@ public class RestaurantProfileRepository {
     private RowMapper<Restaurant> restaurantRowMapper = new RowMapper<Restaurant>() {
         @Override
         public Restaurant mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Restaurant(rs.getInt("id"), rs.getString("email"), rs.getString("name"), rs.getString("address"), rs.getString("contact"), rs.getString("city"));
+            return new Restaurant(rs.getInt("id"), rs.getString("email"), rs.getString("name"), rs.getString("address"), rs.getString("contact"), rs.getString("city"), rs.getString("description"), rs.getString("image"));
         }
     };
 
@@ -32,11 +32,20 @@ public class RestaurantProfileRepository {
 
     public void save(Restaurant restaurant){
         System.out.println(restaurant);
-        String sqlQuery = "insert into restaurant(email, name, address, contact, city) values(?,?,?,?,?)";
-        jdbcTemplate.update(sqlQuery, restaurant.getEmail(), restaurant.getName(), restaurant.getAddress(), restaurant.getContact(), restaurant.getCity());
+        String sqlQuery = "insert into restaurant(email, name, address, contact, city,description,image) values(?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sqlQuery, restaurant.getEmail(), restaurant.getName(), restaurant.getAddress(), restaurant.getContact(), restaurant.getCity(), restaurant.getDescription(),restaurant.getImage());
     }
-//    public List<Restaurant> getAllRestaurants(){
-//    }
+    public List<Restaurant> getAllRestaurants(){
+        String sqlQuery = "select * from restaurant";
+        List<Restaurant> restaurants = jdbcTemplate.query(sqlQuery, restaurantRowMapper);
+        return restaurants;
+    }
+    public Restaurant findById(int id){
+        String sqlQuery = "select * from restaurant where id = ?";
+        System.out.println(id);
+        Restaurant restaurant = jdbcTemplate.queryForObject(sqlQuery,new Object[]{id}, restaurantRowMapper);
+        return restaurant;
+    }
 //    public List<Restaurant> getRestaurantByName(final String restaurantName){
 //
 //    }

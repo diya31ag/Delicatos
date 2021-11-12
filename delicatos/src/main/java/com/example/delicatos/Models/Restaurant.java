@@ -1,5 +1,7 @@
 package com.example.delicatos.Models;
 
+import java.util.Locale;
+
 public class Restaurant {
     private int id;
     private String email;
@@ -7,15 +9,19 @@ public class Restaurant {
     private String address;
     private String contact;
     private String city;
+    private String description;
+    private String image;
     public Restaurant(){
     }
-    public Restaurant(int id, String email, String name, String address, String contact, String city) {
+    public Restaurant(int id, String email, String name, String address, String contact, String city, String description, String image) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.address = address;
         this.contact = contact;
         this.city = city;
+        this.description=description;
+        this.image=image;
     }
 
     public int getId() {
@@ -63,6 +69,26 @@ public class Restaurant {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = city.toLowerCase();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    public String getImageURL(){
+        System.out.println("img/restaurant/"+id+"/"+image);
+        return "/img/restaurant/"+id+"/"+image;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

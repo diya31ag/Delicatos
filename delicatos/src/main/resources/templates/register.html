@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/registerStyle.css" type="text/css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -11,18 +15,42 @@
         <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
             <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
         </div>
-        <input class="form-control" type="email" placeholder="Email Address" name="email"  th:field="*{email}" required>
-        <input class="form-control" type="password" name="password" placeholder="Password" th:field="*{password}" required>
-        <label for="re_password">Re Enter Password</label>
-        <input name="re_password" type="password" class="form-control" id="re_password" placeholder="Password" required>
-        <p>please select your category</p>
-        <input type="radio" th:field="*{role}" th:value="customer" id="customer" required>
-        <label for="customer">Customer</label><br>
+        <label>
+            <p class="label-txt">ENTER YOUR EMAIL</p>
+            <input class="input" type="email" name="email" th:field="*{email}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <p class="label-txt">ENTER YOUR PASSWORD</p>
+            <input class="input" type="password" name="password" th:field="*{password}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <p class="label-txt">RE ENTER PASSWORD</p>
+            <input name="re_password" type="password" class="input" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+<!--        <label>-->
+<!--            <p class="label-txt">Customer</p>-->
+<!--            <input type="radio" th:field="*{role}" th:value="customer" class="input" required>-->
+
+<!--        </label>-->
+<!--        <p class="label-txt">please select your category</p>-->
+        <input type="radio" th:field="*{role}" th:value="customer" id="customer"  required>
+        <label for="customer" class="radios">Customer</label><br>
         <input type="radio" th:field="*{role}" th:value="restaurant" id="restaurant">
-        <label for="restaurant">Restaurant</label><br>
-        <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Register</button>
+        <label for="restaurant"  class="radios">Restaurant</label><br>
+        <button type="submit">Register</button>
         <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
     </form>
+
 </div>
+<script src="js/register.js"></script>
 </body>
 </html>

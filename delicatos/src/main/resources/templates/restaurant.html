@@ -26,9 +26,9 @@
     <label for="img">Photo: </label>
     <input type="file" name="img" id="img" accept="image/png, image/jpeg" /><br>
     <p>please select the category</p>
-    <tr th:each="category : ${Categories}">
-    <input type="checkbox" th:field="*{categories}" th:value="${category}" th:id="${category}">
-    <label th:for="${category}" th:text="${category}"></label><br>
+    <tr th:each="cat : ${Categories}">
+    <input type="radio" th:field="*{category}" th:value="${cat}" th:id="${cat}">
+    <label th:for="${cat}" th:text="${cat}"></label><br>
     </tr>
     <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Add</button>
     <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
@@ -47,10 +47,10 @@
         <td><img th:src="@{${item.getImageURL()}}" /></td>
         <td th:text="${item.itemName}"></td>
         <td th:text="${item.price}"></td>
-        <td>
-            <option th:each="type : ${item.categories}">
-                <p th:text="${type}"> </p>
-            </option>
+        <td th:text="${item.category}">
+<!--            <option th:each="type : ${item.categories}">-->
+<!--                <p th:text="${type}"> </p>-->
+<!--            </option>-->
         </td>
         <td><a th:href="@{/deleteItem(itemId = ${item.id})}"><button>Delete</button></a></td>
     </tr>

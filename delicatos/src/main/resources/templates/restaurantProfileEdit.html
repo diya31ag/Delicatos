@@ -7,11 +7,14 @@
 <body>
 <div class="form-div">
     <p th:text="${restaurant.email}"></p>
-    <form class="form-signin" th:action="@{/restaurantProfileEdit(email = ${restaurant.email})}" method="POST" th:object="${restaurant}">
+    <form class="form-signin" th:action="@{/restaurantProfileEdit(email = ${restaurant.email})}" method="POST" th:object="${restaurant}" enctype="multipart/form-data">
         <input class="form-control" type="text" placeholder="Name" name="name"  th:field="*{name}" required>
         <input class="form-control" type="text" name="contact" placeholder="Contact" th:field="*{contact}" required>
         <input class="form-control" type="text" name="address" placeholder="Address" th:field="*{address}" required>
         <input class="form-control" type="text" name="city" placeholder="City" th:field="*{city}" required>
+        <input class="form-control" type="text" name="description" placeholder="Description" th:field="*{description}">
+        <label for="img">Photo: </label>
+        <input type="file" name="img" id="img" accept="image/png, image/jpeg" /><br>
         <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Register</button>
         <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
     </form>

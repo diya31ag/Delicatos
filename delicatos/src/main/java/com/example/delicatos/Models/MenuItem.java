@@ -7,16 +7,16 @@ public class MenuItem {
     private String restaurant;
     private String itemName;
     private double price;
-    List<String> categories;
+    String category;
     private String photo;
     public MenuItem(){
     }
-    public MenuItem(int id, String restaurant, String itemName, double price, List<String> categories, String photo) {
+    public MenuItem(int id, String restaurant, String itemName, double price, String category, String photo) {
         this.id = id;
         this.restaurant = restaurant;
         this.itemName = itemName;
         this.price = price;
-        this.categories = categories;
+        this.category = category;
         this.photo= photo;
     }
 
@@ -52,12 +52,12 @@ public class MenuItem {
         this.price = price;
     }
 
-    public List<String> getCategories() {
-        return categories;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getImage() {

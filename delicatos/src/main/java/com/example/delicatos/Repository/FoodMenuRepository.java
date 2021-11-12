@@ -21,7 +21,7 @@ public class FoodMenuRepository {
     private RowMapper<MenuItem> menuItemRowMapper = new RowMapper<MenuItem>() {
         @Override
         public MenuItem mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new MenuItem(rs.getInt("id"), rs.getString("restaurant"), rs.getString("itemName"), rs.getDouble("price"), Collections.emptyList(), rs.getString("image"));
+            return new MenuItem(rs.getInt("id"), rs.getString("restaurant"), rs.getString("itemName"), rs.getDouble("price"), rs.getString("category"), rs.getString("image"));
         }
     };
     private RowMapper<String> categoryRowMapper = new RowMapper<String>() {
@@ -31,28 +31,28 @@ public class FoodMenuRepository {
         }
     };
     public MenuItem addMenuItem(MenuItem menuItem){
-        String sqlQuery = "insert into menuItem(restaurant, itemName, price, image) values (?,?,?,?)";
-        jdbcTemplate.update(sqlQuery, menuItem.getRestaurant(), menuItem.getItemName(), menuItem.getPrice(), menuItem.getImage());
+        String sqlQuery = "insert into menuItem(restaurant, itemName, price, image, category) values (?,?,?,?,?)";
+        jdbcTemplate.update(sqlQuery, menuItem.getRestaurant(), menuItem.getItemName(), menuItem.getPrice(), menuItem.getImage(),menuItem.getCategory());
         String sqlQuery1 = "select * from menuItem where restaurant = '" + menuItem.getRestaurant() + "' and itemName = '" + menuItem.getItemName()+ "'";
         MenuItem menuItem1 = jdbcTemplate.queryForObject(sqlQuery1, menuItemRowMapper);
-        for(int i=0;i<menuItem.getCategories().size();i++){
-            String sqlQuery2 = "insert into categories(name, itemId) values (?,?)";
-            jdbcTemplate.update(sqlQuery2, menuItem.getCategories().get(i), menuItem1.getId());
-        }
+//        for(int i=0;i<menuItem.getCategories().size();i++){
+//            String sqlQuery2 = "insert into categories(name, itemId) values (?,?)";
+//            jdbcTemplate.update(sqlQuery2, menuItem.getCategories().get(i), menuItem1.getId());
+//        }
         return menuItem1;
     }
 
     public List<MenuItem> getMenuItemByRestaurant(String restaurant){
         String sqlQuery = "select * from menuItem where restaurant = '"+restaurant+"'";
         List<MenuItem> menuItemList = jdbcTemplate.query(sqlQuery, menuItemRowMapper);
-        for(int i=0;i<menuItemList.size();i++){
-            String sqlQuery1 = "select * from categories where itemId = '" + menuItemList.get(i).getId() + "'";
-            List<String> category = jdbcTemplate.query(sqlQuery1,categoryRowMapper);
-            menuItemList.get(i).setCategories(category);
-//            System.out.println(menuItemList.get(i).getItemName());
-//            for(int j=0;j<menuItemList.get(i).getCategories().size();j++)
-//                System.out.println(menuItemList.get(i).getCategories().get(j));
-        }
+//        for(int i=0;i<menuItemList.size();i++){
+//            String sqlQuery1 = "select * from categories where itemId = '" + menuItemList.get(i).getId() + "'";
+//            List<String> category = jdbcTemplate.query(sqlQuery1,categoryRowMapper);
+//            menuItemList.get(i).setCategories(category);
+////            System.out.println(menuItemList.get(i).getItemName());
+////            for(int j=0;j<menuItemList.get(i).getCategories().size();j++)
+////                System.out.println(menuItemList.get(i).getCategories().get(j));
+//        }
         return menuItemList;
     }
     public void deleteItemByItemId(int id){

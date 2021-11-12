@@ -7,14 +7,18 @@ import com.example.delicatos.Services.CustomerServiceImplementation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import com.example.delicatos.Models.Customer;
-
+import com.example.delicatos.Models.Restaurant;
+import java.util.List;
+import com.example.delicatos.Services.RestaurantServiceImplementation;
 //import java.security.Principal;
 @Controller
 public class CustomerController {
     CustomerServiceImplementation customerServiceImplementation;
+    RestaurantServiceImplementation restaurantServiceImplementation;
     @Autowired
-    public CustomerController(CustomerServiceImplementation customerServiceImplementation){
+    public CustomerController(CustomerServiceImplementation customerServiceImplementation, RestaurantServiceImplementation restaurantServiceImplementation){
         this.customerServiceImplementation = customerServiceImplementation;
+        this.restaurantServiceImplementation=restaurantServiceImplementation;
     }
     @GetMapping("/customerProfileEdit")
     public String Customer(Model model){
@@ -34,6 +38,15 @@ public class CustomerController {
 
     @RequestMapping("/customer")
     public String customer(Model model){
+        List<Restaurant> restaurants = restaurantServiceImplementation.getAllRestaurants();
+        model.addAttribute("restaurants",restaurants);
         return "customer";
+    }
+    @GetMapping("customer/restaurant/{id}")
+    public String restaurantDetailsAndMenu(Model model, @PathVariable("id") int id){
+        Restaurant restaurant=restaurantServiceImplementation.findById(id);
+        model.addAttribute("restaurant", restaurant);
+//        System.out.println(restaurant.getEmail());
+        return "restaurant_menu";
     }
 }

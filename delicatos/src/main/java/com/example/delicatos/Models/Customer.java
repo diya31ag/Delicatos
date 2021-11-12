@@ -17,7 +17,7 @@ public class Customer {
         this.email = email;
         this.mobileNo = mobileNo;
         this.address = address;
-        this.city = city;
+        this.city = city.toLowerCase();
     }
 
     public int getId() {
@@ -73,6 +73,6 @@ public class Customer {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = city.toLowerCase();
     }
 }

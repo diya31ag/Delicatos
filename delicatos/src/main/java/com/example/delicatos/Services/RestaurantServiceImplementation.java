@@ -7,6 +7,8 @@ import com.example.delicatos.Models.Restaurant;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
+
 @Service
 public class RestaurantServiceImplementation {
     RestaurantProfileRepository restaurantProfileRepository;
@@ -17,11 +19,16 @@ public class RestaurantServiceImplementation {
     public Restaurant findByUsername(String email){
         return restaurantProfileRepository.findByEmail(email);
     }
-    public void save(Restaurant restaurant){
+    public Restaurant findById(int id){ return restaurantProfileRepository.findById(id); }
+    public Restaurant save(Restaurant restaurant){
+        System.out.println(restaurant.getImageURL());
+        restaurant.setCity(restaurant.getCity().toLowerCase());
         restaurantProfileRepository.save(restaurant);
+        return restaurantProfileRepository.findByEmail(restaurant.getEmail());
     }
-//    public List<Restaurant> getAllRestaurants(){}
-        //TODO
+    public List<Restaurant> getAllRestaurants(){
+        return restaurantProfileRepository.getAllRestaurants();
+    }
 
 //    public List<Restaurant> getRestaurantByName(final String restaurantName){}
     //TODO
