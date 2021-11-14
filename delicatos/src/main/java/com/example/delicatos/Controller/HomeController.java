@@ -26,13 +26,15 @@ public class HomeController {
     }
     @GetMapping("")
     public String home(SecurityContextHolderAwareRequestWrapper request, Authentication authentication, Model model){
-//        System.out.println(authentication.getAuthorities().toArray()[0].toString().equals("customer"));
-//        System.out.println(request.getRemoteUser());
         List<Restaurant> restaurants = restaurantServiceImplementation.getAllRestaurants();
         model.addAttribute("restaurants",restaurants);
+        String error="";
+        if (model.asMap().get("error") != null) {
+            error=model.asMap().get("error").toString();
+        }
+        model.addAttribute("error", error);
         if(request.getRemoteUser()==null)
         return "homepage";
-//        System.out.println("");
         else if(authentication.getAuthorities().toArray()[0].toString().equals("customer")){
             Customer customer=customerServiceImplementation.findByUsername(request.getRemoteUser());
 

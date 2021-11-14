@@ -110,6 +110,7 @@
 <!-- Product Section Begin -->
 <section class="product spad">
   <div class="container">
+      <p th:if="${error.length()}" th:text="${error}"></p>
     <div sec:authorize="isAuthenticated()" class="row">
       <div class="col-lg-12">
         <ul class="filter__controls">

@@ -56,7 +56,7 @@ public class RestaurantController {
 
     @GetMapping("/restaurant")
     public String restaurant(Model model, SecurityContextHolderAwareRequestWrapper request){
-        String[] Categories = new String[]{"dessert", "snacks", "drinks", "starter", "lunch", "dinner", "breakfast", "vegetables", "sweets","italian", "indian", "chinese", "japanese", "south indian"};
+        String[] Categories = new String[]{"dessert", "drinks", "starter", "vegetables","italian", "indian"};
         model.addAttribute("Categories", Categories);
         model.addAttribute("menuItem", new MenuItem());
         List<MenuItem> menuItemList = foodMenuService.getMenuItemByRestaurant(request.getRemoteUser());

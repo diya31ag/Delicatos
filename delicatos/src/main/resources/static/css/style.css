@@ -2351,6 +2351,20 @@ ol {
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__pic {
 	float: left;
 	margin-right: 30px;
+	width: 25%;
+}
+.shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__pic img{
+	width: 100%;
+	height: 100px;
+	/*background-repeat: no-repeat;*/
+	/*background-size: cover;*/
+	/*background-position: top center;*/
+	object-fit: cover;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	border-radius: 4px;
+	margin-bottom: 0;
 }
 
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text {
@@ -2360,14 +2374,15 @@ ol {
 
 .shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text h6 {
 	color: #111111;
-	font-size: 15px;
+	font-size: 17px;
 	font-weight: 600;
 	margin-bottom: 10px;
 }
 
-.shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text h5 {
+.shopping__cart__table table tbody tr td.product__cart__item .product__cart__item__text span {
 	color: #0d0d0d;
 	font-weight: 700;
+	font-size: 20px;
 }
 
 .shopping__cart__table table tbody tr td.quantity__item {
@@ -2444,7 +2459,8 @@ ol {
 	color: #111111;
 	font-weight: 700;
 	text-transform: uppercase;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
+	font-size: 35px;
 }
 
 .cart__discount form {
@@ -3874,4 +3890,12 @@ ol {
 }
 hr{
 	margin-top: 10px;
+}
+
+figure{
+	width: 30%;
+	/*height: 100px;*/
+	float: left;
+	position: relative;
+	margin-right: 4%;
 }

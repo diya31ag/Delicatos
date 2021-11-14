@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.delicatos.Repository.FoodMenuRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+
 @Service
 public class FoodMenuService {
     private FoodMenuRepository foodMenuRepository;
@@ -23,10 +23,19 @@ public class FoodMenuService {
     public void deleteItemByItemId(int id){
         foodMenuRepository.deleteItemByItemId(id);
     }
+    public Map<String, Collection<MenuItem>> getItemFromRestaurantAndCategoryList(String restaurant, String[] categories){
+        Map<String, Collection<MenuItem>> menuItemMap = new HashMap<String, Collection<MenuItem>>();
+        for(int i=0;i<categories.length;i++){
+            menuItemMap.put(categories[i], foodMenuRepository.getMenuItemByRestaurantIdAndCategory(categories[i], restaurant));
+        }
+        return menuItemMap;
+    }
 //    public List<MenuItem> getMenuItemByRestaurantIdAndCuisineType(String cuisineType, int restaurantId){
 //        return foodMenuRepository.getMenuItemByRestaurantIdAndCuisineType(cuisineType,restaurantId);
 //    }
-//    public MenuItem getMenuItemById(int itemId){
-//        return foodMenuRepository.getMenuItemById(itemId);
-//    }
+    public MenuItem getMenuItemById(int itemId){
+        MenuItem menuItem=foodMenuRepository.getMenuItemById(itemId);
+        System.out.println(menuItem.getId());
+        return menuItem;
+    }
 }

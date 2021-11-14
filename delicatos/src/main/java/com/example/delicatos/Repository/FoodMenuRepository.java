@@ -59,16 +59,19 @@ public class FoodMenuRepository {
         String sqlQuery="delete from menuItem where id = ?";
         jdbcTemplate.update(sqlQuery,id);
     }
-//    public List<MenuItem> getMenuItemByRestaurantIdAndCategory(String category, int restaurantId){
-//        String sqlQuery = "select * from menuItem where restaurant = '" + restaurantId + "' and cuisineType = '" + cuisineType + "'";
-//        List<MenuItem> menuItemList = jdbcTemplate.query(sqlQuery, menuItemRowMapper);
-//        return menuItemList;
-//    }
+    public List<MenuItem> getMenuItemByRestaurantIdAndCategory(String category, String restaurant){
+        String sqlQuery = "select * from menuItem where restaurant = '" + restaurant + "' and category = '" + category + "'";
+        List<MenuItem> menuItemList = jdbcTemplate.query(sqlQuery, menuItemRowMapper);
+//        System.out.println(category+" "+menuItemList.size());
+        return menuItemList;
+    }
 //
-//    public MenuItem getMenuItemById(int itemId){
-//        String sqlQuery = "select * from menuItem where id = '"+itemId+"'";
-//        MenuItem menuItem = jdbcTemplate.queryForObject(sqlQuery, menuItemRowMapper);
-//        return menuItem;
-//    }
+    public MenuItem getMenuItemById(int itemId){
+
+        String sqlQuery = "select * from menuItem where id = '"+itemId+"'";
+        MenuItem menuItem = jdbcTemplate.queryForObject(sqlQuery, menuItemRowMapper);
+        System.out.println(menuItem.getItemName());
+        return menuItem;
+    }
 
 }
