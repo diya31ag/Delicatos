@@ -1,6 +1,32 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="form-div">-->
+
+<!--    <form class="form-signin" th:action="@{/customerProfileEdit(email = ${customer.email})}" method="POST" th:object="${customer}">-->
+<!--        <input class="form-control" type="text" placeholder="First Name" name="firstName"  th:field="*{firstName}" required>-->
+<!--        <input class="form-control" type="text" name="LastName" placeholder="Last Name" th:field="*{lastName}" required>-->
+<!--        <input class="form-control" type="text" name="mobileNo" placeholder="Mobile Number" th:field="*{mobileNo}" required>-->
+<!--        <input class="form-control" type="text" name="address" placeholder="Address" th:field="*{address}" required>-->
+<!--        <input class="form-control" type="text" name="city" placeholder="City" th:field="*{city}" required>-->
+<!--        <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Register</button>-->
+<!--        &lt;!&ndash;        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>&ndash;&gt;-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/registerStyle.css" type="text/css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -8,14 +34,45 @@
 <div class="form-div">
 
     <form class="form-signin" th:action="@{/customerProfileEdit(email = ${customer.email})}" method="POST" th:object="${customer}">
-        <input class="form-control" type="text" placeholder="First Name" name="firstName"  th:field="*{firstName}" required>
-        <input class="form-control" type="text" name="LastName" placeholder="Last Name" th:field="*{lastName}" required>
-        <input class="form-control" type="text" name="mobileNo" placeholder="Mobile Number" th:field="*{mobileNo}" required>
-        <input class="form-control" type="text" name="address" placeholder="Address" th:field="*{address}" required>
-        <input class="form-control" type="text" name="city" placeholder="City" th:field="*{city}" required>
-        <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Register</button>
-        <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
+        <label>
+            <p class="label-txt">FIRST NAME</p>
+            <input class="input" type="text" name="firstName" th:field="*{firstName}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <p class="label-txt">LAST NAME</p>
+            <input class="input" type="text" name="lastName" th:field="*{lastName}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <p class="label-txt">CONTACT NO.</p>
+            <input class="input" type="text" name="mobileNo" th:field="*{mobileNo}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <p class="label-txt">ADDRESS</p>
+            <input class="input" type="text" name="address" th:field="*{address}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <label>
+            <p class="label-txt">CITY</p>
+            <input class="input" type="text" name="city" th:field="*{city}" required>
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+        <button type="submit">Submit</button>
     </form>
+
 </div>
+<script src="js/register.js"></script>
 </body>
 </html>

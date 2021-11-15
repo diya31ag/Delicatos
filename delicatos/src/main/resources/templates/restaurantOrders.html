@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://kit.fontawesome.com/cfd497a47d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+<header class="header">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="header__logo">
+                    <a href="./index.html"><img src="/img/web/delicatos2.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <nav class="header__menu mobile-menu">
+                    <ul>
+                        <li ><a th:href="@{/}">Home</a></li>
+                        <!--                        <li><a href="#">Profile</a></li>-->
+                        <li><a th:href="@{/restaurant/menu}">Menu</a></li>
+                        <!--                        <li><a sec:authorize="isAuthenticated()" th:href="@{/cart}">Cart</a></li>-->
+                        <li class="active"><a th:href="@{/restaurant/orders}">Orders</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="header__nav__option">
+                    <a th:href="@{/logout}">Log out</a>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </div>
+</header>
+<!-- Breadcrumb Section Begin -->
+<!--<div class="jumbotron">-->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <i class="fas fa-hamburger fa-7x" style="color: white; margin-right: 20px"></i>
+                    <span class="align-middle">Orders</span>
+                    <div class="breadcrumb__links">
+                        <!--                        <a href="./index.html">Home</a>-->
+                        <!--                        <a href="./shop.html">Shop</a>-->
+                        <!--                        <span>Shopping Cart</span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--    <h3>Orders</h3>-->
+<!--</div>-->
+<!-- Breadcrumb Section End -->
+
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <!--                        <thead>-->
+                        <!--                        <tr>-->
+                        <!--                            <th>Items</th>-->
+                        <!--                            <th>Quantity</th>-->
+                        <!--                            <th>Total</th>-->
+                        <!--                            <th></th>-->
+                        <!--                        </tr>-->
+                        <!--                        </thead>-->
+                        <tbody th:each="order: ${orderList}">
+                        <tr style="width: 400px">
+                            <!--                            <td class="product__cart__item">-->
+                            <!--                                <div class="product__cart__item__pic">-->
+                            <!--                                    <img th:src="@{${item.getItem().getImageURL()}}" alt="">-->
+                            <!--                                </div>-->
+                            <!--                                <div class="product__cart__item__text">-->
+                            <!--                                    <h6 th:text="${item.getItem().getItemName()}"></h6>-->
+                            <!--                                    <span>&#x20B9;</span>-->
+                            <!--                                    <span th:text="${item.getItem().getPrice()}"></span>-->
+                            <!--                                </div>-->
+                            <!--                            </td>-->
+                            <!--                            <td class="quantity__item">-->
+                            <!--                                <div class="quantity">-->
+                            <!--                                    <div class="pro-qty-2">-->
+                            <!--                                        <a th:href="@{/cart/updateQuantity(id=${item.id}, quantity=${item.quantity}+1)}"><span class="fa fa-angle-left dec qtybtn"></span></a>-->
+                            <!--                                        <input type="text" th:value="${item.quantity}">-->
+                            <!--                                        <a th:href="@{/cart/updateQuantity(id=${item.id}, quantity=${item.quantity}-1)}"><span class="fa fa-angle-right inc qtybtn"></span></a>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </td>-->
+                            <!--                            <td><span>&#x20B9;</span><span class="cart__price" th:text="${item.getItem().getPrice()*item.quantity}"></span></td>-->
+                            <!--                            <td class="cart__close"><a th:href="@{/cart/delete(id=${item.id})}"><i class="fa fa-close"></i></a></td>-->
+                            <div class="row">
+                                <div class="col-md-8" id="orderId"><span>#</span><span th:text="${order.id}+1000"></span> <span class="dot"></span><span th:text="${order.status}" style="color: red; font-style: italic; font-weight: 600"></span><p th:text="${order.dateTime}" style="color: gray"></p></div>
+                                <div class="col-md-4" id="price"><span>&#x20B9;</span><span th:text="${order.total}"></span></div>
+                            </div>
+                            <div class="row">
+                            <div style="font-weight: 600; font-size: 17px; margin-bottom: 20px" class="col-md-4"><i class="fas fa-user-alt"></i>  <span th:text="${order.customerInfo.firstName+' '+order.customerInfo.lastName}"></span></div>
+                            <div class="col-md-8" style="text-align: right"><span th:text="${order.customerInfo.address}" style="text-align: right; color: gray"></span></div>
+                            </div>
+                            <div th:each="item:${order.itemList}">
+                                <div class="row" style="font-size: 20px">
+                                    <div class="col-md-4" style="font-size: 20px"><p th:text="${item.menuItem.itemName}" style="font-size: 17px"></p></div>
+                                    <div class="col-md-4" style="text-align: center; font-size: 20px"><p th:text="${item.quantity}" style="font-size: 17px"></p></div>
+                                    <div class="col-md-4" style="text-align: right; font-size: 20px"><p th:text="${item.quantity*item.menuItem.price}" style="font-size: 17px"></p></div>
+                                </div>
+                            </div>
+                            <hr>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Js Plugins -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery.nicescroll.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

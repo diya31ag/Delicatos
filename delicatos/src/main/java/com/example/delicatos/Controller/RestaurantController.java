@@ -12,10 +12,13 @@ import com.example.delicatos.Models.Restaurant;
 import com.example.delicatos.Models.MenuItem;
 import com.example.delicatos.Services.FoodMenuService;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Collection;
 import java.util.List;
 import com.example.delicatos.Services.RestaurantServiceImplementation;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Map;
 
 //import java.security.Principal;
 @Controller
@@ -81,9 +84,21 @@ public class RestaurantController {
             System.out.println(e);
         }
 
-        return "redirect:/restaurant";
+        return "redirect:/restaurant/menu";
     }
-
+    @GetMapping("/restaurant/menu")
+    public String items(Model model, SecurityContextHolderAwareRequestWrapper request){
+        Restaurant restaurant=restaurantServiceImplementation.findByUsername(request.getRemoteUser());
+        model.addAttribute("restaurant", restaurant);
+        String[] Categories = new String[]{"dessert", "drinks", "starter", "vegetables","italian", "indian"};
+        model.addAttribute("Categories", Categories);
+//        List<MenuItem> menuItemList=foodMenuService.getMenuItemByRestaurant(restaurant.getEmail());
+//        model.addAttribute("menuItemList", menuItemList);
+        Map<String, Collection<MenuItem>> menuItemMap = foodMenuService.getItemFromRestaurantAndCategoryList(restaurant.getEmail(),Categories);
+        model.addAttribute("menuItemMap", menuItemMap);
+        System.out.println(menuItemMap.get("dessert").size());
+        return "restaurantMenu";
+    }
     @GetMapping("/deleteItem")
     public String deleteItem(@RequestParam int itemId){
         foodMenuService.deleteItemByItemId(itemId);

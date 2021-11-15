@@ -1,20 +1,171 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>-->
+<!--    <style>-->
+<!--        #form1 {-->
+<!--            display:none;-->
+<!--        }-->
+<!--    </style>-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Welcome Restaurant</h1>-->
+<!--<a th:href="@{/logout}"><button>Log Out</button></a>-->
+<!--<a th:href="@{/restaurant/profile}"><button>Profile</button></a>-->
+<!--<button id ="formButton">Add Menu Item</button>-->
+<!--<form class="form-addMenuItem" th:action="@{/restaurant}" method="POST" id="form1" enctype="multipart/form-data" th:object="${menuItem}">-->
+<!--    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">-->
+<!--        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>-->
+<!--    </div>-->
+<!--    <label for="name">Name</label>-->
+<!--    <input class="form-control" type="text" placeholder="Name" name="name" id="name" th:field="*{itemName}" required><br>-->
+<!--    <label for="price">Price</label>-->
+<!--    <input class="form-control" type="text" placeholder="Price" name="price" id="price" th:field="*{price}" required><br>-->
+<!--    <label for="img">Photo: </label>-->
+<!--    <input type="file" name="img" id="img" accept="image/png, image/jpeg" /><br>-->
+<!--    <p>please select the category</p>-->
+<!--    <tr th:each="cat : ${Categories}">-->
+<!--    <input type="radio" th:field="*{category}" th:value="${cat}" th:id="${cat}">-->
+<!--    <label th:for="${cat}" th:text="${cat}"></label><br>-->
+<!--    </tr>-->
+<!--    <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Add</button>-->
+<!--    &lt;!&ndash;        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>&ndash;&gt;-->
+<!--</form>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th></th>-->
+<!--        <th>Item Name</th>-->
+<!--        <th>Price</th>-->
+<!--        <th>Category</th>-->
+<!--    </tr>-->
+<!--    <tr th:if="${menuItemList.isEmpty()}">-->
+<!--        <td class="text-center" colspan="3">No Records found. Add some...!</td>-->
+<!--    </tr>-->
+<!--    <tr th:each="item : ${menuItemList}">-->
+<!--        <td><img th:src="@{${item.getImageURL()}}" /></td>-->
+<!--        <td th:text="${item.itemName}"></td>-->
+<!--        <td th:text="${item.price}"></td>-->
+<!--        <td th:text="${item.category}">-->
+<!--&lt;!&ndash;            <option th:each="type : ${item.categories}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p th:text="${type}"> </p>&ndash;&gt;-->
+<!--&lt;!&ndash;            </option>&ndash;&gt;-->
+<!--        </td>-->
+<!--        <td><a th:href="@{/deleteItem(itemId = ${item.id})}"><button>Delete</button></a></td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--<script type="text/javascript">-->
+<!--    document.querySelector("#formButton").addEventListener("click",function(){-->
+<!--        $("#form1").toggle();-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cfd497a47d.js" crossorigin="anonymous"></script>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <style>
         #form1 {
             display:none;
         }
     </style>
-    <title>Title</title>
 </head>
+
 <body>
-<h1>Welcome Restaurant</h1>
-<a th:href="@{/logout}"><button>Log Out</button></a>
-<a th:href="@{/restaurant/profile}"><button>Profile</button></a>
-<button id ="formButton">Add Menu Item</button>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="header__logo">
+                    <a href="./index.html"><img src="img/web/delicatos2.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <nav class="header__menu mobile-menu">
+                    <ul>
+                        <li class="active"><a th:href="@{/}">Home</a></li>
+<!--                        <li><a href="#">Profile</a></li>-->
+                        <li><a th:href="@{/restaurant/menu}">Menu</a></li>
+<!--                        <li><a sec:authorize="isAuthenticated()" th:href="@{/cart}">Cart</a></li>-->
+                        <li><a th:href="@{/restaurant/orders}">Orders</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div class="header__nav__option">
+                    <a th:href="@{/logout}">Log out</a>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+
+<!-- Hero Section Begin -->
+<section class="hero">
+    <div class="hero__slider owl-carousel">
+        <div class="hero__items set-bg" data-setbg="img/hero/slide_1.jpg">
+            <div class="container">
+                <div class="row">
+                    <!--          <div class="col-xl-5 col-lg-7 col-md-8">-->
+                    <div class="hero__text">
+                        <!--              <h6>Summer Collection</h6>-->
+                        <h1 id="jumboText1">Want to do business online?</h1>
+                        <p id="jumbopara">Upload your menu and get the customers online</p>
+                        <button id ="formButton" class="btn btn-warning" style="color: whitesmoke">Add Menu Item</button>
+                        <!--              <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>-->
+                        <!--            </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero__items set-bg" data-setbg="img/hero/slide_2.jpg">
+            <div class="container">
+                <div class="row">
+                    <!--          <div class="col-xl-5 col-lg-7 col-md-8">-->
+                    <div class="hero__text">
+                        <h1 id="jumboText2">Want to do business online?</h1>
+                        <p>Upload your menu and get the customers online</p>
+                    </div>
+                    <!--          </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<div class="container" style="margin-top: 30px; margin-bottom: 40px;">
+
 <form class="form-addMenuItem" th:action="@{/restaurant}" method="POST" id="form1" enctype="multipart/form-data" th:object="${menuItem}">
     <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
         <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
@@ -27,38 +178,52 @@
     <input type="file" name="img" id="img" accept="image/png, image/jpeg" /><br>
     <p>please select the category</p>
     <tr th:each="cat : ${Categories}">
-    <input type="radio" th:field="*{category}" th:value="${cat}" th:id="${cat}">
-    <label th:for="${cat}" th:text="${cat}"></label><br>
+        <input type="radio" th:field="*{category}" th:value="${cat}" th:id="${cat}">
+        <label th:for="${cat}" th:text="${cat}"></label><br>
     </tr>
-    <button class="btn btn-lg text-white bg-theme1 btn-block" type="submit">Add</button>
+    <button type="submit" class="btn btn-dark" style="margin-bottom: 40px;">Add</button>
     <!--        <p class="mt-4 font-weight-normal">Already a member? <a th:href="@{/login}">click here</a></p>-->
 </form>
-<table>
-    <tr>
-        <th></th>
-        <th>Item Name</th>
-        <th>Price</th>
-        <th>Category</th>
-    </tr>
-    <tr th:if="${menuItemList.isEmpty()}">
-        <td class="text-center" colspan="3">No Records found. Add some...!</td>
-    </tr>
-    <tr th:each="item : ${menuItemList}">
-        <td><img th:src="@{${item.getImageURL()}}" /></td>
-        <td th:text="${item.itemName}"></td>
-        <td th:text="${item.price}"></td>
-        <td th:text="${item.category}">
-<!--            <option th:each="type : ${item.categories}">-->
-<!--                <p th:text="${type}"> </p>-->
-<!--            </option>-->
-        </td>
-        <td><a th:href="@{/deleteItem(itemId = ${item.id})}"><button>Delete</button></a></td>
-    </tr>
-</table>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th></th>-->
+<!--        <th>Item Name</th>-->
+<!--        <th>Price</th>-->
+<!--        <th>Category</th>-->
+<!--    </tr>-->
+<!--    <tr th:if="${menuItemList.isEmpty()}">-->
+<!--        <td class="text-center" colspan="3">No Records found. Add some...!</td>-->
+<!--    </tr>-->
+<!--    <tr th:each="item : ${menuItemList}">-->
+<!--        <td><img th:src="@{${item.getImageURL()}}" /></td>-->
+<!--        <td th:text="${item.itemName}"></td>-->
+<!--        <td th:text="${item.price}"></td>-->
+<!--        <td th:text="${item.category}">-->
+<!--            &lt;!&ndash;            <option th:each="type : ${item.categories}">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <p th:text="${type}"> </p>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </option>&ndash;&gt;-->
+<!--        </td>-->
+<!--        <td><a th:href="@{/deleteItem(itemId = ${item.id})}"><button>Delete</button></a></td>-->
+<!--    </tr>-->
+<!--</table>-->
+</div>
 <script type="text/javascript">
     document.querySelector("#formButton").addEventListener("click",function(){
         $("#form1").toggle();
     });
 </script>
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
 </body>
+
 </html>

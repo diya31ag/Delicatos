@@ -62,7 +62,7 @@ public class CustomerController {
 //        model.addAttribute("menuItemList", menuItemList);
         Map<String, Collection<MenuItem>> menuItemMap = foodMenuService.getItemFromRestaurantAndCategoryList(restaurant.getEmail(),Categories);
         model.addAttribute("menuItemMap", menuItemMap);
-        System.out.println(menuItemMap.get("dessert").size());;
+        System.out.println(menuItemMap.get("dessert").size());
 //        menuItemMap = foodMenuService
 //        System.out.println(restaurant.getEmail());
         return "restaurant_menu";

@@ -2068,16 +2068,23 @@ ol {
 /*---------------------
   Breadcrumb
 -----------------------*/
-
+.jumbotron{
+	background: url("../img/web/cta-two-bg.png") no-repeat center center;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	height: 300px;
+}
 .breadcrumb-option {
-	background: #f3f2ee;
+	background: #16161D;
 	padding: 40px 0;
 }
-
-.breadcrumb__text h4 {
-	color: #111111;
-	font-weight: 700;
+.breadcrumb__text span {
+	color: white;
+	font-weight: 800;
 	margin-bottom: 8px;
+	font-size: 40px;
 }
 
 .breadcrumb__links a {
@@ -2338,7 +2345,16 @@ ol {
 .shopping__cart__table table tbody tr {
 	border-bottom: 1px solid #f2f2f2;
 }
-
+#price{
+	color: #2e6da4;
+	text-align: right;
+	font-size: 20px;
+	font-weight: 800;
+}
+#orderId{
+	font-size: 20px;
+	font-weight: 800;
+}
 .shopping__cart__table table tbody tr td {
 	padding-bottom: 30px;
 	padding-top: 30px;
@@ -3898,4 +3914,18 @@ figure{
 	float: left;
 	position: relative;
 	margin-right: 4%;
+}
+
+.col-md-4{
+	color: #0b2e13;
+}
+
+.dot {
+	height: 10px;
+	width: 10px;
+	background-color: red;
+	margin-left: 10px;
+	margin-right: 5px;
+	border-radius: 50%;
+	display: inline-block;
 }
